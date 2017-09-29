@@ -18,6 +18,10 @@
   },
   "homepage": "https://github.com/12Knox/BookStore#readme",
   "dependencies": {
-    "express": "^4.15.5"
-  }
+    "express": "^4.16.0"
+  },
+  "directories": {
+    "example": "example"
+  },
+  "devDependencies": {}
 }
