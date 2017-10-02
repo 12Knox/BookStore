@@ -8,19 +8,19 @@ const cookie = require('cookie-parser');
 // View Engineを設定する
 app.set('view engine', 'ejs');
 
-// Staticフォルダー
-app.use(express.static(path.join(__dirname, 'public')));
+// Static Folder
+app.use(express.static(__dirname + '/public'));
 
 // ルート設定
 const routes = require('./routes/index');
 const users = require('./routes/users');
-const books = require('./routes/books');
+const books = require('./routes/amezon');
 const login = require('./routes/login');
 
 // app.use(passport.initialize());
 app.use('/', routes);
 app.use('/users', users);
-app.use('/api/books', books);
+app.use('/books', books);
 app.use('/login', login);
 
 const port = process.env.PORT || 3000;
