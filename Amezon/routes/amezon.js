@@ -7,23 +7,4 @@ router.get('/books', (req, res) => {
   res.render('amezon');
 });
 
-router.get('/books', (req, res) => {
-  const collection = db.get('books');
-  collection.find({}, (err, books) => {
-    if(err) throw err;
-    res.json(books);
-  });
-});
-
-router.post('/', (req, res) => {
-  const collection = db.get('books');
-  collection.insert({
-    title: req.body.title,
-    description: req.body.description,
-  }, (err, books) => {
-    if (err) throw err;
-    res.json(books);
-  });
-});
-
 module.exports = router;
