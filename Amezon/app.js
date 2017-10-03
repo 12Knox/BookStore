@@ -14,13 +14,11 @@ app.use(express.static(__dirname + '/public'));
 // ルート設定
 const routes = require('./routes/index');
 const users = require('./routes/users');
-const books = require('./routes/amezon');
 const login = require('./routes/login');
 
 // app.use(passport.initialize());
 app.use('/', routes);
 app.use('/users', users);
-app.use('/books', books);
 app.use('/login', login);
 
 const port = process.env.PORT || 3000;

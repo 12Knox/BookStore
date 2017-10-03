@@ -13,18 +13,18 @@ const userDataSchema = new Schema({
 const UserData = mongoose.model('userData', userDataSchema);
 
 // indexを取得
-router.get('/', (req, res, next) => {
+router.get('/', (req, res) => {
   res.render('index', { hoge: 'Welcome!' });
 });
 
-router.get('/get-data', (req, res, next) => {
+router.get('/get-data', (req, res) => {
   UserData.find()
     .then((doc) => {
       res.render('index', { items: doc });
     })
 });
 
-router.post('/register', (req, res, next) => {
+router.post('/register', (req, res) => {
   const item = {
     title: req.body.title,
     content: req.body.content,
@@ -35,7 +35,7 @@ router.post('/register', (req, res, next) => {
   res.redirect('/');
 });
 
-router.post('/update', (req, res, next) => {
+router.post('/update', (req, res) => {
   UserData.findById(id, (err, doc) => {
     if (err) {
       console.error('エラー！記事が見つかりません！');
@@ -48,7 +48,7 @@ router.post('/update', (req, res, next) => {
   res.redirect('/');
 });
 
-router.post('/delete', (req, res, next) => {
+router.post('/delete', (req, res) => {
   const id = req.body.id;
   UserData.findByIdAndRemove(id).exec();
   res.redirect('index');
