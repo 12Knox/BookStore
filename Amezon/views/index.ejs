@@ -8,9 +8,20 @@
 <body>
   <h1>Amezon</h1>
   <p><%= hoge %></p>
-  <form action="test/submit" method="post">
-    <input type="text" name="id" />
-    <button type="submit">送信</button>
+  <form action="insert" method="post">
+    <div class="input">
+      <label for="title">タイトル</label>
+      <input type="text" id="title" name="title">
+    </div>
+    <div class="input">
+        <label for="content">コンテンツ</label>
+        <input type="text" id="content" name="content">
+      </div>
+      <div class="input">
+          <label for="author">著者</label>
+          <input type="text" id="author" name="author">
+        </div>
+        <button type="submit">保存</button>
   </form>
 </body>
 </html>
