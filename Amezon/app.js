@@ -23,7 +23,7 @@ app.use('/login', login);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
-  console.log(`Connected on port : ${ port }`);
+  console.log(`May node be with you at Galaxy ${port}`);
 });
 
 // Passport 設定
