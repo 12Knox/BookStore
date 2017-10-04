@@ -1,1 +1,6 @@
-<p><%= items %></p>
+<% const itemLoop = items %>
+  <% itemLoop.forEach((books) => { %>
+  <p><%= books.title %></p>
+  <p><%= books.content %></p>
+  <p><%= books.author %></p>
+  <% }); %>
