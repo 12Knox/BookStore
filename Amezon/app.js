@@ -26,7 +26,18 @@ app.listen(port, () => {
   console.log(`May node be with you at Galaxy ${port}`);
 });
 
-// Passport 設定
-// app.use(passport.session());
+// Passport
+app.post('/login', passport.authenticate('local', {
+  successRedirect: 'bookResgiter',
+  failureRedirect: 'login',
+  failureFlash: true,
+}));
+
+passport.use(new LocalStrategy({
+  usernameField: 'email',
+  passwordField: 'password',
+}, (username, password, done) => {
+  
+}));
 
 module.exports = app;

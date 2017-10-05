@@ -4,6 +4,8 @@ const router = express.Router();
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const passport = require('passport'),
+  LocalStrategy = require('passport-local').Strategy;
 
 mongoose.connect('mongodb://localhost:27017/amezon');
 const Schema = mongoose.Schema;
@@ -65,5 +67,32 @@ router.post('/delete', (req, res) => {
   BooksData.findByIdAndRemove(id).exec();
   res.redirect('index');
 });
+
+passport.use(new LocalStrategy((username, password, done) => {
+User.findOne({ username: username }, (err, user) => {
+  if (err) { return done(err) }
+  if (!user) {
+    return done(null, false, { message: 'Usernameが違います！'  });
+  }
+  if (!user.validPassword(password)) {
+    return done(null, false, { message: 'Passwordが違います！' });
+  }
+  return done(null, user);
+});
+}));
+
+router.post('/login', passport.authenticate('local'), () => {
+console.log(111);
+res.redirect('/users/' + req.user.username);
+});
+
+router.post('/login', passport.authenticate('local', {
+successRedirect: '/mypage',
+failureRedirect: '/login',
+failureFlash: true,
+// failureFlash: 'ちゃうよ！',
+successFlash: 'せやねん！',
+}));
+
 
 module.exports = router;
