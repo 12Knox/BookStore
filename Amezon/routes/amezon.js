@@ -1,30 +1,22 @@
-const OperationHelper = require('apac').OperationHelper;
-const cheerio = require('cheerio');
- 
-let opHelper;
-let title;
-let $;
+const { OperationHelper } = require('apac');
 
-opHelper = new OperationHelper({
-    awsId:     'AKIAJKZSA3XIWTBEWEKA',
-    awsSecret: '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',
-    assocId:   'eisuke1212-22',
-    endPoint: 'ecs.amazonaws.jp'
+let opHelper = new OperationHelper({
+  awsId: 'AKIAJKZSA3XIWTBEWEKA',
+  awsSecret: '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',
+  assocId: 'eisuke1212-22',
+  endPoint: 'ecs.amazonaws.jp',
 });
 
-opHelper.execute('ItemSearch', {
-    'SearchIndex': 'Books',
-    'BrowseNode': 465610,
-    'Keywords': 'GIS',
-    'ResponseGroup': 'Small',
-    'Sort': 'salesrank'
-}, 
+const operation = 'ItemSearch';
+const params = {
+  SearchIndex: 'Books',
+  Keywords: 'はあちゅう',
+  ResponseGroup: 'ItemAttributes,Offers',
+};
 
-(err, results, xml) => {
-    if (err) { console.log("error"); return; }
-    $ = cheerio.load(xml);
-    $("Items > Item").each(function(idx, item) {
-        title = $(item).find("Title").text();
-        console.log(title);
-    });
+opHelper.execute(operation, params).then((results, responseBody) => {
+  console.log(results);
+  console.log(responseBody);
+}).catch((err) => {
+  console.error(err);
 });

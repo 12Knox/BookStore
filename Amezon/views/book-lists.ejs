@@ -1,6 +1,16 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="css/base.css" />
+  <title>Amezon</title>
+</head>
+<body>
 <% const itemLoop = items %>
   <% itemLoop.forEach((books) => { %>
   <p><%= books.title %></p>
   <p><%= books.content %></p>
   <p><%= books.author %></p>
   <% }); %>
+</body>
+</html>
