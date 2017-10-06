@@ -12,17 +12,36 @@ router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(express.static(path.join(__dirname, 'public')));
 
+// Books
 const booksDataSchema = new Schema({
   title: { type: String, required: true },
   content: String,
   author: String,
+  users: [{ type: Schema.Types.ObjectId, ref: 'users' }],
 }, { collection: 'books' });
 
-const BooksData = mongoose.model('books', booksDataSchema);
+// Users
+const usersDataSchema = new Schema({
+  username: { type: String, required: true },
+  password: { type: String, required: true },
+  books: [{ type: Schema.Types.ObjectId, ref: 'books' }],
+}, { collection: 'users' });
 
-// amezonを取得
-router.get('/', (req, res) => {
-  res.render('mypage', { message: `Welcome! ${users.username} さん` });
+exports.Books = mongoose.model('books', booksDataSchema);
+exports.Users = mongoose.model('users', usersDataSchema);
+
+const { Users } = require('./model');
+
+Users.find('users', (err) => {
+  if (err) {
+    throw err;
+  } else {
+    Users.find()
+      .populate('books')
+      .exec((users) => {
+        console.log(users);
+      });
+  }
 });
 
 // データを取得する(MongoDBから引っ張ってくる)
@@ -45,6 +64,7 @@ router.post('/book-lists', (req, res) => {
   res.redirect('/book-lists');
 });
 
+// Updateする場所
 router.post('/update', (req, res) => {
   const { id } = req.body;
   BooksData.findById(id, (err, doc) => {

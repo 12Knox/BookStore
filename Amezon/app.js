@@ -13,15 +13,18 @@ app.use(express.static(`${__dirname}/public`));
 // ルート設定
 const index = require('./routes/index');
 const mypage = require('./routes/mypage');
-const register = require('./routes/core');
+const model = require('./routes/model');
 
-// app.use(passport.initialize());
 app.use('/', index);
 app.use('/mypage', mypage);
-app.use('/core', register);
+app.use('/model', model);
 
 app.get('/', (req, res) => {
   res.render('index', { message: 'Hello! Welcome to Amezon!' });
+});
+
+app.get('/mypage', (req, res) => {
+  res.render('mypage');
 });
 
 const port = process.env.PORT || 3000;
