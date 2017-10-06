@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="css/base.css" />
+  <title>Amezon</title>
+</head>
+<body>
+  <h1>Amezon</h1>
+    <p><%= message %></p>
+    <p><%= users.username %></p>
+    <p><%= users.password %></p>  
+    <form action="/book-lists" method="post">
+      <div class="input">
+        <label for="title">タイトル</label>
+        <input type="text" id="title" name="title" />
+      </div>
+      <div class="input">
+          <label for="content">コンテンツ</label>
+          <input type="text" id="content" name="content" />
+        </div>
+        <div class="input">
+            <label for="author">著者</label>
+            <input type="text" id="author" name="author" />
+          </div>
+          <button type="submit">保存</button>
+    </form>
+</form>
+</body>
+</html>

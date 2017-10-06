@@ -1,41 +1,27 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href="css/base.css" />
-  <title>Amezon</title>
-</head>
-<body>
-  <h1>Amezon</h1>
-  <p><%= message %></p>
-
-  <form action="/login" method="post">
-    <div>
-        <label>Username:</label>
-        <input type="text" name="username"/>
-    </div>
-    <div>
-        <label>Password:</label>
-        <input type="password" name="password"/>
-    </div>
-    <div>
-        <input type="submit" value="Log In"/>
-    </div>
-</form>
-<form action="/register" method="post">
-  <div class="input">
-    <label for="title">タイトル</label>
-    <input type="text" id="title" name="title" />
+<h1>Login</h1>
+<p><%= message %></p>
+<p>Please Login to continue.</p>
+<form action="/login" method="post">
+  <div>
+    <label>ユーザーID：<input type="text" name="username" /></label>
   </div>
-  <div class="input">
-      <label for="content">コンテンツ</label>
-      <input type="text" id="content" name="content" />
+  <div>
+    <label>パスワード：<input type="password" name="password" /></label>
+  </div>
+  <div>
+    <input type="submit" value="ログイン" />
+    <p>or</p>
+    <p>ユーザー登録する</p>
     </div>
-    <div class="input">
-        <label for="author">著者</label>
-        <input type="text" id="author" name="author" />
+    </form>
+    <form action="/mypage" method="post">
+      <div>
+        <label>ユーザーID：<input type="text" name="username" /></label>
       </div>
-      <button type="submit">保存</button>
+      <div>
+        <label>パスワード：<input type="password" name="password" /></label>
+      </div>
+      <div>
+        <input type="submit" value="登録" />
+  </div>
 </form>
-</body>
-</html>

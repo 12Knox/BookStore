@@ -8,9 +8,9 @@
 <body>
 <% const itemLoop = items %>
   <% itemLoop.forEach((books) => { %>
-  <p><%= books.title %></p>
-  <p><%= books.content %></p>
-  <p><%= books.author %></p>
+  <p>書籍名：<%= books.title %></p>
+  <p>内容：<%= books.content %></p>
+  <p>著者：<%= books.author %></p>
   <% }); %>
 </body>
 </html>
