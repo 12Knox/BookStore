@@ -32,21 +32,15 @@ router.get('/login', (req, res) => {
   res.render('login', { user: req.user, error: req.flash('error') });
 });
 
-router.post('/login', passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }), (req, res, next) => {
-  res.session.save((err) => {
-    if(err) {
-      return next(err);
-    }
-    res.redirect('/');
+router.post('/login', passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }), (req, res) => {
+  res.session.save(() => {
+    res.redirect('/mypage');
   });
 });
 
-router.get('logout', (req, res, next) => {
+router.get('logout', (req, res) => {
   req.logout();
-  req.session.save((err) => {
-    if(err) {
-      return next(err);
-    }
+  req.session.save(() => {
     res.redirect('/');
   });
 });

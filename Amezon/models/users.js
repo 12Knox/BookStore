@@ -12,15 +12,15 @@ const Users = new Schema({
 }, { collection: 'users' });
 
 // 本を登録して、Registeredページに飛ばす
-// router.post('/book-lists', (req, res) => {
+router.post('/book-lists', (req, res) => {
 //  それぞれの変数にインプットタグで入れたコンテンツを代入する
-//   const { username } = req.body;
-//   const { password } = req.body;
-//   const item = { title, content, author };
-//   const data = new UsersData(item);
-//   data.save();
-//   res.redirect('/mypage');
-// });
+  const { username } = req.body;
+  const { password } = req.body;
+  const item = { title, content, author };
+  const data = new UsersData(item);
+  data.save();
+  res.redirect('/mypage');
+});
 
 Users.plugin(passportLocalMongoose);
 

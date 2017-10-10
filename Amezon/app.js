@@ -49,10 +49,6 @@ app.get('/', (req, res) => {
   res.render('index', { message: 'Hello! Welcome to Amezon!' });
 });
 
-app.get('/mypage', (req, res) => {
-  res.render('mypage');
-});
-
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`May node be with you at Galaxy ${port}`);
