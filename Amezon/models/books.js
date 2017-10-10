@@ -1,3 +1,5 @@
+const express = require('express');
+const router = express();
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const passportLocalMongoose = require('passport-local-mongoose');
@@ -15,20 +17,6 @@ const booksDataSchema = new Schema({
 }, { collection: 'books' });
 
 exports.Books = mongoose.model('books', booksDataSchema);
-
-const { Users } = require('./model');
-
-Users.find('users', (err) => {
-  if (err) {
-    throw err;
-  } else {
-    Users.find()
-      .populate('books')
-      .exec((users) => {
-        console.log(users);
-      });
-  }
-});
 
 // データを取得する(MongoDBから引っ張ってくる)
 router.get('/book-lists', (req, res) => {

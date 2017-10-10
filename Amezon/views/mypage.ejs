@@ -7,11 +7,17 @@
   <title>Amezon</title>
 </head>
 <body>
+<%= if(!user) { %>
+  <a href="/login">Login</a>
+<%= } else if(user) { %>
+  <p>You are now logedin as <%= user.username %></p>
+  <a href="/logout">Logout</a>
 <% const itemLoop = items %>
   <% itemLoop.forEach((books) => { %>
   <p>書籍名：<%= books.title %></p>
   <p>内容：<%= books.content %></p>
   <p>著者：<%= books.author %></p>
   <% }); %>
+ <%= } %>
 </body>
 </html>
