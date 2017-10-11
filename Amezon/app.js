@@ -3,14 +3,13 @@ const path = require('path');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
-const session = require('express-session');
 const flash = require('connect-flash');
 
 // ルート設定
 const routes = require('./routes/index');
 const mypage = require('./routes/mypage');
-const usersModel = require('./models/users');
-const booksModel = require('./models/books');
+// const usersModel = require('./models/users');
+// const booksModel = require('./models/books');
 
 const app = express();
 
@@ -24,6 +23,7 @@ app.use(require('express-session')({
   resave: false,
   saveUninitialized: false,
 }));
+
 app.use(passport.initialize());
 app.use(flash());
 app.use(passport.session());
@@ -33,11 +33,12 @@ app.use(express.static(`${__dirname}/public`));
 
 app.use('/', routes);
 app.use('/mypage', mypage);
-app.use('/usersModel', usersModel);
-app.use('/booksModel', booksModel);
+// app.use('/usersModel', usersModel);
+// app.use('/booksModel', booksModel);
 
 // Passportのコンフィグ(公式ドキュメントどおり)
 const users = require('./models/users');
+
 passport.use(new LocalStrategy(users.authenticate()));
 passport.serializeUser(users.serializeUser());
 passport.deserializeUser(users.deserializeUser());

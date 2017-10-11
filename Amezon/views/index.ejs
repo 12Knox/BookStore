@@ -1,26 +1,15 @@
-<h1>Login</h1>
-<p>Please Login to continue.</p>
-<form action="/login" method="post">
-  <div>
-    <label>ユーザーID：<input type="text" name="username" /></label>
-  </div>
-  <div>
-    <label>パスワード：<input type="password" name="password" /></label>
-  </div>
-  <div>
-    <input type="submit" value="ログイン" />
-    <p>or</p>
-    <p>ユーザー登録する</p>
-    </div>
-    </form>
-    <form action="/mypage" method="post">
-      <div>
-        <label>ユーザーID：<input type="text" name="username" /></label>
-      </div>
-      <div>
-        <label>パスワード：<input type="password" name="password" /></label>
-      </div>
-      <div>
-        <input type="submit" value="登録" />
-  </div>
-</form>
+<h1>Amezon</h1>
+  <% if (!user) { %>
+    <a href="/login">Login</a>
+    <br />
+    <a href="/register">Register</a>
+  <% } else if (user) { %>
+    <p>You are now logged In as <%= user.username %></p>
+  <% const itemLoop = items %>
+    <% itemLoop.forEach((books) => { %>
+    <p>書籍名：<%= books.title %></p>
+    <p>内容：<%= books.content %></p>
+    <p>著者：<%= books.author %></p>
+    <% }); %>
+  <a href="/logout">Logout</a>    
+  <% } %>

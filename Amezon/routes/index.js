@@ -1,7 +1,7 @@
 const express = require('express');
-const router = express.Router();
 const passport = require('passport');
-const Users = require('../models/users');
+const User = require('../models/users');
+const router = express.Router();
 
 router.get('/', (req, res) => {
   res.render('index', { user: req.user });
@@ -12,13 +12,13 @@ router.get('/register', (req, res) => {
 });
 
 router.post('/register', (req, res, next) => {
-  Users.register(new Users({ username: req.body.username }), req.body.password, (err, users) => {
+  User.register(new User({ username: req.body.username }), req.body.password, (err, user) => {
     if (err) {
       return res.render('register', { error: err.message });
     }
 
     passport.authenticate('local')(req, res, () => {
-      res.session.save((err) => {
+      req.session.save((err) => {
         if (err) {
           return next(err);
         }
@@ -32,9 +32,12 @@ router.get('/login', (req, res) => {
   res.render('login', { user: req.user, error: req.flash('error') });
 });
 
-router.post('/login', passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }), (req, res) => {
-  res.session.save(() => {
-    res.redirect('/mypage');
+router.post('/login', passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }), (req, res, next) => {
+  res.session.save((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect('/');
   });
 });
 
