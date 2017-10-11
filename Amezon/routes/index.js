@@ -1,6 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const User = require('../models/users');
+
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -12,7 +13,9 @@ router.get('/register', (req, res) => {
 });
 
 router.post('/register', (req, res, next) => {
-  User.register(new User({ username: req.body.username }), req.body.password, (err, user) => {
+  console.log(1111);
+  User.register(new User({ users: req.param.users }), req.param.password, (err, users) => {
+    console.log(User);
     if (err) {
       return res.render('register', { error: err.message });
     }
@@ -22,7 +25,7 @@ router.post('/register', (req, res, next) => {
         if (err) {
           return next(err);
         }
-        res.redirect('/');
+        res.redirect('/mypage');
       });
     });
   });
