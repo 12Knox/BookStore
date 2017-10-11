@@ -1,11 +1,11 @@
 const express = require('express');
 const passport = require('passport');
-const User = require('../models/users');
-
+const Account = require('../models/users');
 const router = express.Router();
 
+
 router.get('/', (req, res) => {
-  res.render('index', { user: req.user });
+  res.render('index', { user : req.user });
 });
 
 router.get('/register', (req, res) => {
@@ -13,10 +13,9 @@ router.get('/register', (req, res) => {
 });
 
 router.post('/register', (req, res, next) => {
-  console.log(1111);
-  User.register(new User({ users: req.param.users }), req.param.password, (err, users) => {
-    console.log(User);
+  Account.register(new Account({ username: req.param.username }), req.param.password, (err) => {
     if (err) {
+      console.log('errrrrrrrroooooooooooooooooooooooooooor');
       return res.render('register', { error: err.message });
     }
 
@@ -25,18 +24,19 @@ router.post('/register', (req, res, next) => {
         if (err) {
           return next(err);
         }
-        res.redirect('/mypage');
+        res.redirect('/');
       });
     });
   });
 });
 
+
 router.get('/login', (req, res) => {
-  res.render('login', { user: req.user, error: req.flash('error') });
+  res.render('login', { user : req.user, error : req.flash('error')});
 });
 
 router.post('/login', passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }), (req, res, next) => {
-  res.session.save((err) => {
+  req.session.save((err) => {
     if (err) {
       return next(err);
     }
@@ -44,9 +44,12 @@ router.post('/login', passport.authenticate('local', { failureRedirect: '/login'
   });
 });
 
-router.get('logout', (req, res) => {
+router.get('/logout', (req, res, next) => {
   req.logout();
-  req.session.save(() => {
+  req.session.save((err) => {
+    if (err) {
+      return next(err);
+    }
     res.redirect('/');
   });
 });
