@@ -2,8 +2,10 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const passport = require('passport');
-const LocalStrategy = require('passport-local');
+const LocalStrategy = require('passport-local').Strategy;
 const flash = require('connect-flash');
+const Account = require('./models/users');
+
 
 // ルート設定
 const routes = require('./routes/index');

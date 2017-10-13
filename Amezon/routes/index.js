@@ -13,7 +13,8 @@ router.get('/register', (req, res) => {
 });
 
 router.post('/register', (req, res, next) => {
-  Account.register(new Account({ username: req.param.username }), req.param.password, (err) => {
+  console.log(Account);
+  Account.register(new Account({ username: req.body.username }), req.body.password, (err) => {
     if (err) {
       console.log('errrrrrrrroooooooooooooooooooooooooooor');
       return res.render('register', { error: err.message });
