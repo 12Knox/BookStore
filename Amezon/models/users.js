@@ -1,15 +1,28 @@
 const express = require('express');
+
 const router = express();
 const mongoose = require('mongoose');
+
 const { Schema } = mongoose;
 const passportLocalMongoose = require('passport-local-mongoose');
 
 // Users
-const Account = new Schema({
-  user: { type: String, required: true },
-  pass: { type: String, required: true },
+const AccountSchema = new Schema({
+  id: { type: String, required: true },
+  password: { type: String, required: true },
+  updated_at: { type: Date },
+  created_at: { type: Date },
 }, { collection: 'users' });
 
-Account.plugin(passportLocalMongoose);
+AccountSchema.pre('save', (next) => {
+  const now = new Date();
+  this.update_at = now;
+  if (!this.created_at) {
+    this.created_at = now;
+  }
+  next();
+});
 
-module.exports = mongoose.model('users', Account);
+// Account.plugin(passportLocalMongoose);
+
+module.exports = mongoose.model('users', AccountSchema);
