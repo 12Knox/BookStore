@@ -2,6 +2,10 @@
 @import url(https://fonts.googleapis.com/earlyaccess/notosansjp.css);
 
 body {
-  font-family: 'Noto Sans Japanese';
+  font-family: "Rounded Mplus 1c";
   color: #333333;
+}
+
+h1 {
+  font-family: 'Noto Sans Japanese';  
 }

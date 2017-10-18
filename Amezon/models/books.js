@@ -13,7 +13,6 @@ const booksDataSchema = new Schema({
   title: { type: String, required: true },
   content: String,
   author: String,
-  users: [{ type: Schema.Types.ObjectId, ref: 'users' }],
 }, { collection: 'books' });
 
 exports.Books = mongoose.model('books', booksDataSchema);
